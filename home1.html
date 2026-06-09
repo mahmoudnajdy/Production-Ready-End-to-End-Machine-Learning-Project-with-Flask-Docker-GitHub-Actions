@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston House Price Prediction</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .prediction-box {
+            margin-top: 25px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        @media(max-width:600px) {
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🏠 House Price Prediction</h1>
+
+        <p class="subtitle">
+            Enter property details below and predict the estimated house price.
+        </p>
+
+        <form action="{{ url_for('predict') }}" method="post">
+
+            <div class="form-grid">
+
+                <input type="text" name="MedInc" placeholder="Median Income" required>
+                <input type="text" name="HouseAge" placeholder="House Age" required>
+                <input type="text" name="AveRooms" placeholder="Average Rooms" required>
+                <input type="text" name="AveBedrms" placeholder="Average Bedrooms" required>
+                <input type="text" name="Population" placeholder="Population" required>
+                <input type="text" name="AveOccup" placeholder="Average Occupancy" required>
+                <input type="text" name="Latitude" placeholder="Latitude" required>
+                <input type="text" name="Longitude" placeholder="Longitude" required>
+
+            </div>
+
+            <button type="submit">
+                Predict Price
+            </button>
+
+        </form>
+
+        {% if prediction_text %}
+        <div class="prediction-box">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
