@@ -5,7 +5,7 @@ A production-style Machine Learning application that predicts house prices throu
 ## 🚀 Live Demo
 
 **Application URL:**
-`http://98.91.240.38:5000`
+`http://54.224.212.36:5000/`
 
 > Deployed on AWS EC2 using Docker and automated CI/CD with GitHub Actions.
 
