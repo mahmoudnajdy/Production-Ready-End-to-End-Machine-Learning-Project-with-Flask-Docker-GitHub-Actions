@@ -1,249 +1,149 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI House Price Predictor</title>
+    <title>Boston House Price Prediction</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family:'Poppins',sans-serif;
-    }
-
-    body{
-        min-height:100vh;
-        background:linear-gradient(
-            135deg,
-            #0f172a,
-            #1e293b,
-            #111827
-        );
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        padding:30px;
-        color:white;
-    }
-
-    .main-container{
-        width:100%;
-        max-width:1200px;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:40px;
-        align-items:center;
-    }
-
-    .left-section{
-        padding:20px;
-    }
-
-    .badge{
-        display:inline-block;
-        background:#2563eb;
-        padding:8px 16px;
-        border-radius:30px;
-        font-size:14px;
-        margin-bottom:20px;
-    }
-
-    .title{
-        font-size:3rem;
-        line-height:1.2;
-        margin-bottom:20px;
-    }
-
-    .description{
-        color:#cbd5e1;
-        line-height:1.8;
-        margin-bottom:30px;
-    }
-
-    .tech-stack{
-        display:flex;
-        flex-wrap:wrap;
-        gap:10px;
-    }
-
-    .tech{
-        background:rgba(255,255,255,0.1);
-        padding:10px 16px;
-        border-radius:8px;
-        font-size:14px;
-    }
-
-    .form-card{
-        background:rgba(255,255,255,0.08);
-        backdrop-filter:blur(15px);
-        border:1px solid rgba(255,255,255,0.1);
-        padding:30px;
-        border-radius:20px;
-        box-shadow:0 20px 50px rgba(0,0,0,0.3);
-    }
-
-    .form-card h2{
-        margin-bottom:25px;
-        text-align:center;
-    }
-
-    .form-grid{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:15px;
-    }
-
-    input{
-        width:100%;
-        padding:14px;
-        border:none;
-        border-radius:10px;
-        background:rgba(255,255,255,0.1);
-        color:white;
-        font-size:14px;
-    }
-
-    input::placeholder{
-        color:#cbd5e1;
-    }
-
-    input:focus{
-        outline:none;
-        border:1px solid #3b82f6;
-    }
-
-    button{
-        width:100%;
-        margin-top:20px;
-        padding:15px;
-        border:none;
-        border-radius:12px;
-        background:#2563eb;
-        color:white;
-        font-size:16px;
-        font-weight:600;
-        cursor:pointer;
-        transition:0.3s;
-    }
-
-    button:hover{
-        background:#1d4ed8;
-        transform:translateY(-2px);
-    }
-
-    .prediction-box{
-        margin-top:20px;
-        padding:15px;
-        text-align:center;
-        background:rgba(34,197,94,0.2);
-        border:1px solid rgba(34,197,94,0.4);
-        border-radius:10px;
-        color:#86efac;
-        font-weight:600;
-    }
-
-    @media(max-width:900px){
-
-        .main-container{
-            grid-template-columns:1fr;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .title{
-            font-size:2.2rem;
+        body {
+            background: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
         }
 
-        .form-grid{
-            grid-template-columns:1fr;
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-    }
 
-</style>
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
 
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
 
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .prediction-box {
+            margin-top: 25px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        @media(max-width:600px) {
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="main-container">
+    <div class="container">
 
+        <h1>🏠 House Price Prediction</h1>
 
-<div class="left-section">
+        <p class="subtitle">
+            Enter property details below and predict the estimated house price.
+        </p>
 
-    <div class="badge">
-        Machine Learning Project
-    </div>
+        <form action="{{ url_for('predict') }}" method="post">
 
-    <h1 class="title">
-        🏠 AI House Price Predictor
-    </h1>
+            <div class="form-grid">
 
-    <p class="description">
-        Predict California housing prices using a Machine Learning model
-        deployed with Flask, Docker, AWS EC2 and GitHub Actions.
-        Enter property information and get an instant prediction.
-    </p>
+                <input type="text" name="MedInc" placeholder="Median Income" required>
+                <input type="text" name="HouseAge" placeholder="House Age" required>
+                <input type="text" name="AveRooms" placeholder="Average Rooms" required>
+                <input type="text" name="AveBedrms" placeholder="Average Bedrooms" required>
+                <input type="text" name="Population" placeholder="Population" required>
+                <input type="text" name="AveOccup" placeholder="Average Occupancy" required>
+                <input type="text" name="Latitude" placeholder="Latitude" required>
+                <input type="text" name="Longitude" placeholder="Longitude" required>
 
-    <div class="tech-stack">
-        <div class="tech">Machine Learning</div>
-        <div class="tech">Flask</div>
-        <div class="tech">Docker</div>
-        <div class="tech">AWS EC2</div>
-        <div class="tech">GitHub Actions</div>
-        <div class="tech">CI/CD</div>
-    </div>
+            </div>
 
-</div>
+            <button type="submit">
+                Predict Price
+            </button>
 
-<div class="form-card">
+        </form>
 
-    <h2>Property Information</h2>
-
-    <form action="{{ url_for('predict') }}" method="post">
-
-        <div class="form-grid">
-
-            <input type="text" name="MedInc" placeholder="Median Income" required>
-
-            <input type="text" name="HouseAge" placeholder="House Age" required>
-
-            <input type="text" name="AveRooms" placeholder="Average Rooms" required>
-
-            <input type="text" name="AveBedrms" placeholder="Average Bedrooms" required>
-
-            <input type="text" name="Population" placeholder="Population" required>
-
-            <input type="text" name="AveOccup" placeholder="Average Occupancy" required>
-
-            <input type="text" name="Latitude" placeholder="Latitude" required>
-
-            <input type="text" name="Longitude" placeholder="Longitude" required>
-
+        {% if prediction_text %}
+        <div class="prediction-box">
+            {{ prediction_text }}
         </div>
+        {% endif %}
 
-        <button type="submit">
-            Predict House Price
-        </button>
-
-    </form>
-
-    {% if prediction_text %}
-    <div class="prediction-box">
-        {{ prediction_text }}
     </div>
-    {% endif %}
-
-</div>
-
-
-</div>
 
 </body>
-</html>
 
+</html>
